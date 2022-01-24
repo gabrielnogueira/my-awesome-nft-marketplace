@@ -10,7 +10,7 @@ const ImageBackgroundWrapper = styled.div.attrs({
   className: `absolute w-[200px] h-[200px] opacity-50`,
 })``;
 
-export const ReachedEnd = styled.div.attrs({
+export const NoResults = styled.div.attrs({
   className: `font-medium text-3xl flex justify-center items-center h-[400px]`,
   children: (
     <ImageBackgroundWrapper>

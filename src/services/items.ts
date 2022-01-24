@@ -2,75 +2,90 @@ import axios from "axios";
 import { Item, PaginatedResponse } from "../../interfaces";
 import { SWRFetcherProps, SWRService } from "../hooks/useDataFetcher";
 
-export const getItems = (): SWRService<PaginatedResponse<Item[]>> => {
+export const getItem = (id: string): SWRService<Item> => {
+  return {
+    url: (pagination) => {
+      return `/api/items/${id}`;
+    },
+    execute: async ({ signal, url }: SWRFetcherProps) => {
+      const { data } = await axios.get(url);
+
+      return data;
+    },
+  };
+};
+
+export const getItems = (query: string): SWRService<Item[]> => {
   let url = `/api/items`;
 
   return {
-    url,
-    execute: async ({ signal, query, pagination }: SWRFetcherProps) => {
+    url: (pagination) => {
       let apiUrl = `${url}?q=${query}`;
-
       if (pagination) {
         const { skip, limit } = pagination;
-        apiUrl += `?skip=${skip}&limit=${limit}`;
+        apiUrl += `&skip=${skip}&limit=${limit}`;
       }
-      const response = await axios.get(apiUrl, {
+
+      return apiUrl;
+    },
+    query: query,
+    execute: async ({ signal, url }: SWRFetcherProps) => {
+      const response = await axios.get(url, {
         signal,
       });
 
-      const data: PaginatedResponse<Item[]> = response.data;
+      const pageWrapper: PaginatedResponse<Item[]> = response.data;
 
-      return data;
+      return pageWrapper.data;
     },
   };
 };
 
-export const getTrendingItems = (): SWRService<PaginatedResponse<Item[]>> => {
+export const getTrendingItems = (): SWRService<Item[]> => {
   let url = `/api/items/trending`;
 
   return {
-    url,
-    execute: async ({ signal, query, pagination }: SWRFetcherProps) => {
+    url: (pagination) => {
       let apiUrl = url;
-
       if (pagination) {
         const { skip, limit } = pagination;
         apiUrl += `?skip=${skip}&limit=${limit}`;
       }
-      const response = await axios.get(apiUrl, {
+
+      return apiUrl;
+    },
+    execute: async ({ signal, url }: SWRFetcherProps) => {
+      const response = await axios.get(url, {
         signal,
       });
 
-      const data: PaginatedResponse<Item[]> = response.data;
+      const pageWrapper: PaginatedResponse<Item[]> = response.data;
 
-      return data;
+      return pageWrapper.data;
     },
   };
 };
 
-export const getRelatedItems = async ({
-  signal,
-  query = "",
-  pagination,
-}: SWRFetcherProps): Promise<PaginatedResponse<Item[]>> => {
-  let url = `/api/items/${query}/related`;
+export const getRelatedItems = (id: string): SWRService<Item[]> => {
+  let url = `/api/items/${id}/related`;
 
-  if (pagination) {
-    const { skip, limit } = pagination;
-    url += `?skip=${skip}&limit=${limit}`;
-  }
+  return {
+    url: (pagination) => {
+      let apiUrl = url;
+      if (pagination) {
+        const { skip, limit } = pagination;
+        apiUrl += `?skip=${skip}&limit=${limit}`;
+      }
+      return apiUrl;
+    },
+    execute: async ({ signal, url }: SWRFetcherProps) => {
+      const response = await axios.get(url, {
+        signal,
+      });
 
-  const response = await axios.get(url, {
-    signal,
-  });
+      const pageWrapper: PaginatedResponse<Item[]> = response.data;
 
-  return response.data;
-};
-
-export const getItem = async (id: string): Promise<Item> => {
-  let url = `/api/items/${id}`;
-
-  const response = await axios.get(url);
-
-  return response.data;
+      return pageWrapper.data;
+    },
+  };
 };

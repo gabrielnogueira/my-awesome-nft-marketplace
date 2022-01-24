@@ -12,10 +12,13 @@ import {
   Title,
 } from "./styles";
 import Image from "next/image";
+import { useSelectedItem } from "src/providers/item";
 
 export interface PageHeaderProps {}
 
 const FloatingHeaderWrapper: React.FC<PageHeaderProps> = (props) => {
+
+  const {selectedItem} = useSelectedItem();
   return (
     <FloatingHeader>
       <HeaderContent>
@@ -28,7 +31,7 @@ const FloatingHeaderWrapper: React.FC<PageHeaderProps> = (props) => {
               objectPosition="left"
             />
           </ImageWrapper>
-          <Title>Lola by Diego Roa</Title>
+          <Title>{selectedItem.name} by Diego Roa</Title>
         </LeftContent>
         <Content>
           <Button>The Gizmo</Button>
@@ -36,7 +39,7 @@ const FloatingHeaderWrapper: React.FC<PageHeaderProps> = (props) => {
           <Button active>The Collection</Button>
         </Content>
         <RightContent>
-          <FavoriteButton>78</FavoriteButton>
+          <FavoriteButton>{selectedItem.favorites}</FavoriteButton>
           <RedeemButton>Redeem this item</RedeemButton>
         </RightContent>
       </HeaderContent>

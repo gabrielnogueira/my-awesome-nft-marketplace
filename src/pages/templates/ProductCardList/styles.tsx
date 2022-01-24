@@ -3,7 +3,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const CardList = styled.div.attrs({
-  className: `relative w-full h-[100%] pb-5 flex-1`,
+  className: `relative w-full h-[100%] flex-1`,
 })`
   button {
     ${tw`ml-2 mr-2`}
@@ -11,7 +11,7 @@ export const CardList = styled.div.attrs({
 `;
 
 export const CardRow = styled.div.attrs({
-  className: `grid grid-cols-4 gap-6 pb-6`,
+  className: `card-row grid grid-cols-4 gap-6 pb-6`,
 })``;
 
 const ImageBackgroundWrapper = styled.div.attrs({
@@ -19,7 +19,7 @@ const ImageBackgroundWrapper = styled.div.attrs({
 })``;
 
 export const ReachedEnd = styled.div.attrs({
-  className: `font-medium text-3xl flex justify-center items-center h-[300px] -mt-[100px]`,
+  className: `font-medium text-3xl flex justify-center items-center h-[300px]`,
   children: (
     <ImageBackgroundWrapper>
       <Image

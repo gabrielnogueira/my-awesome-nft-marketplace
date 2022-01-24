@@ -40,13 +40,14 @@ const ProductCardList: React.FC<HeaderProps> = ({
       (initialFetch || loadedRowsCount > 0) &&
       rowCount === loadedRowsCount + (stopIndex - startIndex + 1)
     ) {
+      console.log("loadMore")
       loadMore();
       return;
     }
   };
 
   const onClickCard = (index) => {
-    setSelectedItem(() => items[index]);
+    setSelectedItem(items[index]);
   };
 
   const rowRenderer = ({ index, isScrolling, isVisible, key, style }) => {
@@ -127,7 +128,7 @@ const ProductCardList: React.FC<HeaderProps> = ({
           </WindowScroller>
         )}
       </InfiniteLoader>
-      {!hasMore && <ReachedEnd />}
+      {!hasMore && items.length > 0 && <ReachedEnd />}
     </>
   );
 };

@@ -20,9 +20,8 @@ const RelatedProducts: React.FC<RelatedProducts> = ({
     return <ProductCardList items={[]} />;
   }
 
-  const { data, more, isFetching, ended, fetch } = useDataFetcher<Item[]>(
-    getRelatedItems,
-    selectedItem?.id?.toString()
+  const { data, more, isFetching, ended } = useDataFetcher<Item[]>(
+    getRelatedItems(selectedItem?.id?.toString()),
   );
 
   return (

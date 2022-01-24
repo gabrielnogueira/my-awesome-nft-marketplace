@@ -6,9 +6,11 @@ import { getItems } from "../services/items";
 
 const useHook = () => {
   const [searchText, setSearchText] = useState("");
+
+  console.log({searchText});
+
   const { data, more, isFetching, ended } = useDataFetcher<Item[]>(
-    getItems,
-    searchText,
+    getItems(searchText)
   );
 
   return { searchText, setSearchText, data, isFetching: !data || isFetching, ended, more };

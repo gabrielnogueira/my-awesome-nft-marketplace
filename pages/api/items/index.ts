@@ -24,7 +24,7 @@ const handler = async (
             item.description.indexOf(q.toString()) > 0
         ).slice(Number(skip), Number(skip) + Number(limit));
 
-        console.log({a: filtered.length})
+        console.log({q: q.toString()})
 
         const result: PaginatedResponse<Item[]> = {
           skip: _skip,

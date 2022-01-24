@@ -23,7 +23,7 @@ export const Value = styled.span.attrs({
 })``;
 
 export const ValueCaption = styled.span.attrs({
-  className: `font-bold text-gray-300 text-sm ml-1`,
+  className: `font-medium text-gray-400 text-sm ml-1`,
 })``;
 
 export const AvatarGroup = styled.div.attrs({

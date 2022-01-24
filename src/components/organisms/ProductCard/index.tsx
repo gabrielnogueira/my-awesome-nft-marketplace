@@ -46,7 +46,7 @@ const ProductCardWrapper: React.FC<ProductCardProps> = ({
         <Title>{item.name}</Title>
         <Row>
           <Value>{currencyFormat(item.price)}</Value>
-          <ValueCaption>List Item</ValueCaption>
+          <ValueCaption>List Value</ValueCaption>
         </Row>
         <Footer>
           <AvatarGroup>

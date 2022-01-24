@@ -5,18 +5,22 @@ import { Container, Section } from "./styles";
 import { LoadingContext } from "../../providers/loading";
 import FloatingHeader from "../templates/FloatingHeader";
 import { useSelectedItem } from "../../providers/item";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import RelatedProducts from "./sections/RelatedProducts";
 
 const ProductDetails: React.FC = () => {
   const [showFloatingBar, setShowFloatingBar] = useState(false);
   const { selectedItem } = useSelectedItem();
+  const relatedProductsRef = useRef();
 
-  const scrollListener = () => {
-    const winScroll =
-      document.body.scrollTop || document.documentElement.scrollTop;
+  let observerOption = {
+    rootMargin: '-40%'
+  };
 
-    if (winScroll > 600) {
+  const scrollListener = (entries, observer) => {
+    const [entry] = entries;
+
+    if (entry.isIntersecting) {
       setShowFloatingBar(true);
     } else {
       setShowFloatingBar(false);
@@ -24,9 +28,19 @@ const ProductDetails: React.FC = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", scrollListener);
-    return () => window.removeEventListener("scroll", scrollListener);
-  }, []);
+    console.log({relatedProductsRef});
+    let observer = new IntersectionObserver(scrollListener, observerOption);
+
+    if (relatedProductsRef.current) {
+      observer.observe(relatedProductsRef.current);
+    }
+
+    return () => {
+      if (relatedProductsRef.current) {
+        observer.unobserve(relatedProductsRef.current);
+      }
+    };
+  }, [relatedProductsRef, observerOption]);
 
   return (
     <PageTemplate>
@@ -34,8 +48,10 @@ const ProductDetails: React.FC = () => {
         <LoadingContext.Provider value={{ isLoading: !selectedItem }}>
           <Header />
           <ProductCover item={selectedItem} />
-          <Section>
-            <RelatedProducts selectedItem={selectedItem} />
+          <Section ref={relatedProductsRef}>
+            <RelatedProducts
+              selectedItem={selectedItem}
+            />
           </Section>
         </LoadingContext.Provider>
       </Container>

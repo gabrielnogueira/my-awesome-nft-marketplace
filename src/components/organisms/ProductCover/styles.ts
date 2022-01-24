@@ -71,7 +71,7 @@ export const CreatorInfo = styled.div.attrs({
   }
 
   ${Caption} {
-    ${tw`text-xs mt-3.5`}
+    ${tw`text-xs text-gray-400 mt-3.5`}
   }
 
   ${Label} {

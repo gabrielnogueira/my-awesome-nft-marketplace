@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import useSWR from "swr";
-import { PaginatedResponse } from "../../interfaces";
 
 export type Pagination = {
   skip: number;
@@ -9,12 +8,12 @@ export type Pagination = {
 
 export type SWRFetcherProps = {
   signal: AbortSignal;
-  query?: string;
-  pagination?: Pagination;
+  url: string;
 };
 
 export type SWRService<T> = {
-  url: string;
+  url: (pagination: Pagination) => string;
+  query?: string;
   execute: (props: SWRFetcherProps) => Promise<T>;
 };
 
@@ -22,20 +21,32 @@ export type SWRFetcher<T> = (fetcherProps: SWRFetcherProps) => SWRService<T>;
 
 const useDataFetcher = <T>(
   service: SWRService<T>,
-  query?: string,
   callback?: (data: T) => void
 ) => {
   const [abortController, setAbortController] = useState<AbortController>();
   const [ended, setEnded] = useState<boolean>(false);
   const [result, setResult] = useState<T[]>([]);
+  const [isFetching, setIsFetching] = useState<boolean>(true);
   const [isFetchingMore, setIsFetchingMore] = useState<boolean>(false);
   const [paging, setPaging] = useState<Pagination>({
     skip: 0,
     limit: 20,
   });
 
+  useEffect(() => {
+    if (service.query) {
+      setIsFetching(true);
+      setResult([]);
+      setPaging({
+        skip: 0,
+        limit: 20,
+      });
+      setEnded(false);
+    }
+  }, [service.query]);
+
   const executeService = useCallback(
-    async (skip, limit) => {
+    async (url) => {
       if (abortController) {
         abortController.abort();
       }
@@ -44,17 +55,16 @@ const useDataFetcher = <T>(
 
       const response: T = await service.execute({
         signal: abort.signal,
-        query: query,
-        pagination: { skip, limit },
+        url,
       });
 
       return response;
     },
-    [query, abortController]
+    [abortController]
   );
 
-  const { data, error } = useSWR<T>(service.url, () =>
-    executeService(paging.skip, paging.limit)
+  const { data, error } = useSWR<T>(service.url(paging), (url) =>
+    executeService(url)
   );
 
   useEffect(() => {
@@ -69,11 +79,10 @@ const useDataFetcher = <T>(
 
         return newR;
       });
+      setIsFetching(false);
       setIsFetchingMore(false);
     }
   }, [data]);
-
-  const isFetching = (!result || result.length === 0) && !data && !error;
 
   useEffect(() => {
     if (callback) {
@@ -85,6 +94,7 @@ const useDataFetcher = <T>(
     if (isFetching || isFetchingMore || ended) {
       return null;
     }
+    setIsFetching(false);
     setIsFetchingMore(true);
 
     setPaging((p) => ({ ...p, skip: result.flat(1).length }));

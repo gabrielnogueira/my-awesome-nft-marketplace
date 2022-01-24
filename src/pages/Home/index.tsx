@@ -9,7 +9,7 @@ import { Item } from "../../../interfaces";
 
 const Home: React.FC = () => {
   const { data, more, isFetching, ended } = 
-    useDataFetcher<Item[]>(getTrendingItems);
+    useDataFetcher<Item[]>(getTrendingItems());
 
   console.log({data, more, isFetching, ended});
 

@@ -11,14 +11,15 @@ import Image from "next/image";
 import Dropdown from "../../src/components/molecules/Dropdown";
 import Avatar from "../../src/components/atoms/Avatar";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { useSearch } from "../../src/providers/search";
 
 export interface PageHeaderProps {
   isValidPage?: boolean;
+  onClickCallback?(): void;
 }
 
-const Logo = ({onClick}) => {
+const Logo = ({ onClick }) => {
   return (
     <ImageWrapper onClick={onClick}>
       <Image src="/assets/images/logo.png" layout="fill" objectFit="contain" />
@@ -26,15 +27,22 @@ const Logo = ({onClick}) => {
   );
 };
 
-const AppHeader: React.FC<PageHeaderProps> = ({ isValidPage }) => {
-
+const AppHeader: React.FC<PageHeaderProps> = ({
+  isValidPage,
+  onClickCallback,
+}) => {
   const router = useRouter();
 
   if (!isValidPage) {
     return (
       <PageHeader>
         <LeftContent>
-          <Logo onClick={()=> router.push("/")} />
+          <Logo
+            onClick={() => {
+              onClickCallback();
+              router.push("/");
+            }}
+          />
         </LeftContent>
       </PageHeader>
     );
@@ -59,14 +67,17 @@ const AppHeader: React.FC<PageHeaderProps> = ({ isValidPage }) => {
     ) {
       setSearchText(search);
     }
-
-    //clear when go to productDetailsPage
   }, [router.pathname, router.asPath, router.query]);
 
   return (
     <PageHeader>
       <LeftContent>
-        <Logo />
+        <Logo
+          onClick={() => {
+            setSearchText("");
+            router.push("/");
+          }}
+        />
         <Anchor>Explore</Anchor>
       </LeftContent>
       <Content>
