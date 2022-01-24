@@ -13,13 +13,13 @@ The challenge is create an app with 3 main components: Search Box, Search Result
 
 The tech stack premisses of this challenge are:
 
-##Client:
+## Client:
 
   * HTML
   * JS (React)
   * CSS (Tailwind or Styled-Components)
 
-##Server:
+## Server:
 
   * Node >= 6
   * Express
