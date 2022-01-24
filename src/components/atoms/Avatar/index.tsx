@@ -5,7 +5,7 @@ import Image, { ImageProps } from "next/image";
 
 export type AvatarProps = Omit<ImageProps, "src"> &
   LoadingProps & {
-    src: string;
+    src?: string;
   };
 
 const AvatarWrapper: React.FC<AvatarProps> = ({ isLoading, src, ...props }) => {

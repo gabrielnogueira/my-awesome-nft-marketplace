@@ -28,11 +28,11 @@ const ProductCardSkeleton = () => {
         </Row>
         <Footer>
           <AvatarGroup>
-              <Avatar loading />
-              <Avatar loading/>
-              <Avatar loading />
+              <Avatar />
+              <Avatar/>
+              <Avatar />
           </AvatarGroup>
-          <FavoriteButton loading />
+          <FavoriteButton />
         </Footer>
       </Body>
     </Card>

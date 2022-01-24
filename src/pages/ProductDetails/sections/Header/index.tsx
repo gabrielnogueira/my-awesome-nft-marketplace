@@ -7,10 +7,13 @@ import {
   withLoadingContext,
   LoadingProps,
 } from "../../../../providers/loading";
+import { Item } from "interfaces";
 
-export type HeaderProps = React.HTMLAttributes<HTMLDivElement> & LoadingProps;
+export type HeaderProps = React.HTMLAttributes<HTMLDivElement> & LoadingProps & {
+  item: Item
+};
 
-const HeaderWrapper: React.FC<HeaderProps> = ({ isLoading }) => {
+const HeaderWrapper: React.FC<HeaderProps> = ({ isLoading, item }) => {
   if (isLoading) {
     return <Skeleton />;
   }
@@ -21,7 +24,7 @@ const HeaderWrapper: React.FC<HeaderProps> = ({ isLoading }) => {
         <Button>The Item</Button>
       </Container>
       <FloatingButton>
-        <FavoriteButton>75</FavoriteButton>
+        <FavoriteButton>{item.favorites}</FavoriteButton>
       </FloatingButton>
     </Header>
   );

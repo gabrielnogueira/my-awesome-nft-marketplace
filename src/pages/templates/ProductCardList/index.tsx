@@ -29,10 +29,11 @@ const ProductCardList: React.FC<HeaderProps> = ({
   }
 
   const itemsPerRow = 4;
-  const loadedRowsCount = items.length / itemsPerRow;
+  const loadedRowsCount = Math.ceil(items.length / itemsPerRow);
   const rowCount = loadedRowsCount + (hasMore ? 3 : 0);
 
   const { setSelectedItem } = useSelectedItem();
+  
   const isRowLoaded = ({ index }) => index < loadedRowsCount;
 
   const loadMoreRows = async ({ startIndex, stopIndex }) => {
@@ -40,7 +41,6 @@ const ProductCardList: React.FC<HeaderProps> = ({
       (initialFetch || loadedRowsCount > 0) &&
       rowCount === loadedRowsCount + (stopIndex - startIndex + 1)
     ) {
-      console.log("loadMore")
       loadMore();
       return;
     }
@@ -67,32 +67,28 @@ const ProductCardList: React.FC<HeaderProps> = ({
       );
     }
 
+    const content = [];
+
+    for (let i = 0; i < 4; i++) {
+      const itemIndex = index * 4 + i;
+      if (itemIndex < items.length) {
+        content.push(
+          <Card
+            key={`${itemIndex}-${key}-${index}-${i}`}
+            item={items[itemIndex]}
+            onClick={() => onClickCard(itemIndex)}
+          />
+        );
+      }
+    }
+
     return (
       <CardRow
         key={`${key}-${index}-row`}
         style={style}
         className={isVisible ? "isVisible" : ""}
       >
-        <Card
-          key={`${key}-${index}-0`}
-          item={items[index]}
-          onClick={() => onClickCard(index)}
-        />
-        <Card
-          key={`${key}-${index}-1`}
-          item={items[index + 1]}
-          onClick={() => onClickCard(index + 1)}
-        />
-        <Card
-          key={`${key}-${index}-2`}
-          item={items[index + 2]}
-          onClick={() => onClickCard(index + 2)}
-        />
-        <Card
-          key={`${key}-${index}-3`}
-          item={items[index + 3]}
-          onClick={() => onClickCard(index + 3)}
-        />
+        {content}
       </CardRow>
     );
   };

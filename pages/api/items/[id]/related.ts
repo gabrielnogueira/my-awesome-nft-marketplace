@@ -33,9 +33,7 @@ const handler = async (
           data: filtered,
         };
 
-        setTimeout(() => {
-          res.status(200).json(result);
-        }, 1000);
+        res.status(200).json(result);
       } catch (err) {
         res.status(500).json({ statusCode: 500, message: err.message });
       }

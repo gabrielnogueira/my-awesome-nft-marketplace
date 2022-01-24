@@ -6,6 +6,9 @@ import { Item } from "../../interfaces";
 import { getItem } from "../services/items";
 import { useSearch } from "./search";
 
+//this provider is used to handle selected item state
+//it will fetch for the item using dataFetcher hook
+//it handle the scenario when user type the url directly
 const useHook = () => {
   const [selectedItem, setSelectedItem] = useState<Item>();
   const [itemId, setItemId] = useState<string>();
@@ -17,10 +20,10 @@ const useHook = () => {
   const onSelectItem = (item: Item) => {
     setSearchText("");
     setSelectedItem(()=>item);
-    console.log({item});
+    setItemId(()=>item.id.toString());
     const url = `/items/${item.id}`;
     if (router.pathname !== url) {
-      router.push(`/items/${item.id}`);
+      router.push(url);
     }
   };
 

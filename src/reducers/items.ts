@@ -3,6 +3,12 @@ import { Item } from "../../interfaces";
 
 export type State = Item[];
 
+
+//this reduce was created intended to handle app state in a better way
+//the ideia is has isolated context states and use it on the app combined as needed
+//it is not being used now, cause i decided to use providers and useState, since the sice effects are simple
+//and app has no complex logic and complex state / state management.
+//but start using it is a good optimization and a good practice 
 enum ActionTypes {
   SET_ITEMS = "SET_ITEMS",
   SET_MORE_ITEMS = "SET_MORE_ITEMS",

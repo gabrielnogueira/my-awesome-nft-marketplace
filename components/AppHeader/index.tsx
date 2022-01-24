@@ -11,7 +11,7 @@ import Image from "next/image";
 import Dropdown from "../../src/components/molecules/Dropdown";
 import Avatar from "../../src/components/atoms/Avatar";
 import { useEffect } from "react";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useSearch } from "../../src/providers/search";
 
 export interface PageHeaderProps {
@@ -27,6 +27,11 @@ const Logo = ({ onClick }) => {
   );
 };
 
+//this components is the base header of the app
+//is responsible to fetch search using useSearch hook
+//it handle scenario that user types manually on the url
+//it handle scenario when user start typing in a route that is not the search,
+//so redirect user to search route
 const AppHeader: React.FC<PageHeaderProps> = ({
   isValidPage,
   onClickCallback,
@@ -50,14 +55,20 @@ const AppHeader: React.FC<PageHeaderProps> = ({
 
   const { searchText, setSearchText } = useSearch();
 
+  //if user is on home or item details, redirect to search results
+  //if is already on search result but clear the search, redirect to home
   useEffect(() => {
     if (searchText) {
       router.push(`/items?search=${searchText}`);
-    } else if (searchText == "" && router.pathname === "/items?search") {
+    } else if (
+      searchText == "" &&
+      router.asPath.substring(0, router.asPath.length - 1) === "/items?search="
+    ) {
       router.push(`/`);
     }
   }, [searchText, router.pathname]);
 
+  //handle manually type on url
   useEffect(() => {
     const { search } = router.query;
     if (

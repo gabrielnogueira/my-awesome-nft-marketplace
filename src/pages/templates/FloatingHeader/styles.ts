@@ -47,7 +47,7 @@ export const Title = styled.h1.attrs({
 
 export const RedeemButton = styled.button.attrs({
   className: `ml-2 relative inline-flex font-medium text-white items-center px-4 py-2 border border-transparent text-xs rounded-full 
- hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 overflow-hidden h-[36px]`,
+ hover:shadow-md overflow-hidden h-[36px]`,
 })`
   &::before {
     content: " ";

@@ -5,5 +5,5 @@ export const Container = styled.div.attrs({
 })``;
 
 export const Section = styled.div.attrs({
-  className: `mt-20`,
+  className: `pt-20`,
 })``;

@@ -2,11 +2,17 @@ import axios from "axios";
 import { Item, PaginatedResponse } from "../../interfaces";
 import { SWRFetcherProps, SWRService } from "../hooks/useDataFetcher";
 
+
+//here is where we should handle business rules of our app
+//this is a layer where we should handle cases like authentication, inject access token, 
+//refresh token, handle servers and midlewares errors and so on.
+//to use it in useDataFetcher just implement the interfaces and inject as a parameters there
 export const getItem = (id: string): SWRService<Item> => {
   return {
     url: (pagination) => {
       return `/api/items/${id}`;
     },
+    query: id,
     execute: async ({ signal, url }: SWRFetcherProps) => {
       const { data } = await axios.get(url);
 

@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Item, PaginatedResponse } from "../../../../interfaces";
 import fakeItems from "../../../../utils/temp/items.json";
 
 const handler = async (
@@ -21,9 +20,7 @@ const handler = async (
           (item) => item.id == id
         );
 
-        setTimeout(() => {
           res.status(200).json(item);
-        }, 1000);
       } catch (err) {
         res.status(500).json({ statusCode: 500, message: err.message });
       }

@@ -6,8 +6,15 @@ export default {
   component: ProductCover,
 } as Meta;
 
-const Template: Story<ProductCoverProps> = (args) => <ProductCover {...args} />;
+const Template: Story<ProductCoverProps> = (args) => <div style={{ width: 1200}}><ProductCover {...args} /></div>;
 
 export const Base = Template.bind({});
 Base.args = {
+  item:{
+    name: 'Item name',
+    description: 'Item description',
+    price: 123,
+    favorites: 75,
+    image: '/assets/images/product-1.png'
+  }
 };

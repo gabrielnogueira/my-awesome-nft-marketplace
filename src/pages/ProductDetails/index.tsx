@@ -7,6 +7,11 @@ import FloatingHeader from "../templates/FloatingHeader";
 import { useSelectedItem } from "../../providers/item";
 import { useEffect, useRef, useState } from "react";
 import RelatedProducts from "./sections/RelatedProducts";
+import {
+  ShowAnimationWrapper,
+  SwapAnimationWrapper,
+} from "src/components/utils/animations";
+import { AnimatePresence } from "framer-motion";
 
 const ProductDetails: React.FC = () => {
   const [showFloatingBar, setShowFloatingBar] = useState(false);
@@ -14,10 +19,10 @@ const ProductDetails: React.FC = () => {
   const relatedProductsRef = useRef();
 
   let observerOption = {
-    rootMargin: '-40%'
+    rootMargin: "-40%",
   };
 
-  const scrollListener = (entries, observer) => {
+  const scrollListener = (entries) => {
     const [entry] = entries;
 
     if (entry.isIntersecting) {
@@ -28,7 +33,6 @@ const ProductDetails: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log({relatedProductsRef});
     let observer = new IntersectionObserver(scrollListener, observerOption);
 
     if (relatedProductsRef.current) {
@@ -46,16 +50,22 @@ const ProductDetails: React.FC = () => {
     <PageTemplate>
       <Container>
         <LoadingContext.Provider value={{ isLoading: !selectedItem }}>
-          <Header />
-          <ProductCover item={selectedItem} />
-          <Section ref={relatedProductsRef}>
-            <RelatedProducts
-              selectedItem={selectedItem}
-            />
+          <Header item={selectedItem} />
+          <SwapAnimationWrapper key={selectedItem?.id.toString()}>
+            <ProductCover item={selectedItem} />
+          </SwapAnimationWrapper>
+          <Section ref={relatedProductsRef} id="related">
+            <RelatedProducts selectedItem={selectedItem} />
           </Section>
         </LoadingContext.Provider>
       </Container>
-      {showFloatingBar && <FloatingHeader />}
+      <AnimatePresence>
+        {showFloatingBar && (
+          <ShowAnimationWrapper key={showFloatingBar.toString()}>
+            <FloatingHeader />
+          </ShowAnimationWrapper>
+        )}
+      </AnimatePresence>
     </PageTemplate>
   );
 };

@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import useSWR from "swr";
 
+// this hook was created as a encapsulation for useSWR
+// it will keep pagination state, request abortion, fetching flags
+// the ideia is to be something flexible and deacopled from business logic
+// so i created some contrats and we can inject services to fetch the data
+// a good optimization on this is abstract pagination related states from this hook to keep it with single responsability
+
 export type Pagination = {
   skip: number;
   limit: number;
@@ -100,10 +106,13 @@ const useDataFetcher = <T>(
     setPaging((p) => ({ ...p, skip: result.flat(1).length }));
   };
 
+  if (error && error.message !== "canceled") {
+    throw new Error(error);
+  }
+
   return {
     data: result.flat(1),
     error,
-    fetch,
     more,
     ended,
     isFetching,

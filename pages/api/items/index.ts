@@ -24,8 +24,6 @@ const handler = async (
             item.description.indexOf(q.toString()) > 0
         ).slice(Number(skip), Number(skip) + Number(limit));
 
-        console.log({q: q.toString()})
-
         const result: PaginatedResponse<Item[]> = {
           skip: _skip,
           limit: _limit,
@@ -35,9 +33,7 @@ const handler = async (
           data: filtered,
         };
 
-        setTimeout(() => {
           res.status(200).json(result);
-        }, 1000);
       } catch (err) {
         res.status(500).json({ statusCode: 500, message: err.message });
       }

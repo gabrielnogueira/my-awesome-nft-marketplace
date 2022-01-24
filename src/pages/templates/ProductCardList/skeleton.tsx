@@ -1,13 +1,13 @@
 import Card from "../../../components/organisms/ProductCard";
-import { CardList, CardRow } from "./styles";
+import { CardRow } from "./styles";
 
 export const CardRowSkeleton = ({ index }) => {
   return (
-    <CardRow key={`skeleton-row-1`}>
-      <Card key={`card-row-1-1`} />
-      <Card key={`card-row-1-2`} />
-      <Card key={`card-row-1-3`} />
-      <Card key={`card-row-1-4`} />
+    <CardRow key={`skeleton-row-${index}`}>
+      <Card key={`card-row--${index}-0`} />
+      <Card key={`card-row--${index}-1`} />
+      <Card key={`card-row--${index}-2`} />
+      <Card key={`card-row--${index}-3`} />
     </CardRow>
   );
 };

@@ -1,47 +1,69 @@
-# TypeScript Next.js example
+This webapp is deployed on netlify! 
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+You can take a look at: https://my-awesome-nft-marketplace.netlify.app/
 
-## Preview
+[![Netlify Status]()](https://app.netlify.com/sites/my-awesome-nft-marketplace/deploys)
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-typescript)
+# My Awesome NFT Marketplace!
 
-## Deploy your own
+This is a practical activity proposed by [Qurable](https://www.qurable.co) as a challenge in their selection process.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+The challenge is create an app with 3 main components: Search Box, Search Results and Item/Product Details.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+The tech stack premisses of this challenge are:
 
-## How to use it?
+##Client:
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+  * HTML
+  * JS (React)
+  * CSS (Tailwind or Styled-Components)
+
+##Server:
+
+  * Node >= 6
+  * Express
+
+
+Was requested on the challenge to consider the following:
+
+  * Usability
+  * SEO
+  * Performance
+  * Scalability
+
+I sent an email to process accountable asking some questions and chose the folowing stack:
+
+  * Next.js as Framework
+  * Tailwind together with styled-components;
+  * axios nad useSWR for handling api requests;
+  * Typescript;
+
+I Choose Next.js cause generate static sites and or server side rendering, what is good for SEO and for app performance. Other than that it is prepared to scale. To get better app performance, i decide to use react-virtualized to get a good performance on long list of items and useSWR to fast requests.
+
+
+## How this works?
+### App usage
+1. User can see a list of trending items on home page;
+2. User can search for a particular item. When start typing app will redirect to serach results page;
+4. Users can click to select an item. App will redirect user to product detail pages;
+5. On product details page, app will show detailed info about the product and a list of related items.
+
+## TODO list (not required to the challenge)
+- [ ] Mobile/Responsive UI Version;
+- [ ] tests;
+
+## Getting Started with this project
+  To run this project, you need to clone this repo and install the dependencies running ```yarn```.
+
+  After above step, just exec ```yarn dev``` or ```yarn build && yarn start```.
 
 ```bash
-npx create-next-app --example with-typescript with-typescript-app
-# or
-yarn create next-app --example with-typescript with-typescript-app
+$ git clone https://github.com/gabrielnogueira/my-awesome-nft-marketplace
+$ cd my-awesome-nft-marketplace
+$ yarn
+$ yarn build
+$ yarn start
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
-
-## Notes
-
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
-
-```
-npm install --save-dev typescript
-```
-
-To enable TypeScript's features, we install the type declarations for React and Node.
-
-```
-npm install --save-dev @types/react @types/react-dom @types/node
-```
-
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
-
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
-
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+Enjoy!

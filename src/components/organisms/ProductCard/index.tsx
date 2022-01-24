@@ -16,7 +16,7 @@ import {
 } from "./styles";
 import { LoadingProps, withLoadingContext } from "../../../providers/loading";
 import { Item } from "interfaces";
-import { currencyFormat } from "src/components/utils/formatter";
+import { currencyFormat } from "../../utils/formatters";
 
 export type ProductCardProps = React.HTMLAttributes<HTMLDivElement> &
   LoadingProps & {

@@ -13,8 +13,3 @@ Base.args = {
   children: 'Base Anchor'
 };
 
-export const Active = Template.bind({});
-Active.args = {
-  children: 'Active Anchor',
-  active: true
-};

@@ -1,7 +1,7 @@
-import { useItemsReducer } from "./items";
+import { State, useItemsReducer } from "./items";
 
-export const useRelatedItemsReducer = (initialState = []) => {
-    const {items, setItems, setMoreItems} = useItemsReducer([]);
-    return { items, setItems, setMoreItems };
-  };
-  
+//just an abstraction using the items reducer but in a different context
+export const useRelatedItemsReducer = (initialState: State = []) => {
+  const { items, setItems, setMoreItems } = useItemsReducer([]);
+  return { items, setItems, setMoreItems };
+};

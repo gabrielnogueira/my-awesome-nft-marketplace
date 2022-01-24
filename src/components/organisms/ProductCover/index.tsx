@@ -51,7 +51,7 @@ const ProductCoverWrapper: React.FC<ProductCoverProps> = ({isLoading, item}) => 
           </CreatorInfo>
         </Body>
         <Footer>
-          <Anchor>
+          <Anchor href="#related">
             <Icon icon="ArrowDownIcon" />
             Discover the collection
           </Anchor>

@@ -6,8 +6,9 @@ import { ItemProvider } from "../src/providers/item";
 import { ErrorBoundary } from "react-error-boundary";
 import { AppWrapper, ContentWrapper, ErrorFallback } from "components/utils";
 import { useState } from "react";
+import { SwapAnimationWrapper } from "src/components/utils/animations";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
   const renderHeader = Component.name !== "NotFound";
   const [error, setError] = useState(0);
 
@@ -20,6 +21,7 @@ function MyApp({ Component, pageProps }) {
               <>
                 <AppHeader
                   isValidPage={false}
+                  //should reset error state when user navigate to home
                   onClickCallback={() => setError(Math.random())}
                 />
                 <ErrorFallback />
@@ -31,7 +33,9 @@ function MyApp({ Component, pageProps }) {
           <SearchProvider>
             <AppHeader isValidPage={renderHeader} />
             <ItemProvider>
-              <Component {...pageProps} />
+              <SwapAnimationWrapper key={router.route}>
+                <Component {...pageProps} />
+              </SwapAnimationWrapper>
             </ItemProvider>
           </SearchProvider>
         </ErrorBoundary>
