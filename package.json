@@ -4,17 +4,38 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "storybook": "start-storybook -p 6006 -s ./public",
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.5",
     "next": "latest",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-loading-skeleton": "^3.0.2",
+    "swr": "^1.1.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@storybook/addon-actions": "^6.4.13",
+    "@storybook/addon-essentials": "^6.4.13",
+    "@storybook/addon-links": "^6.4.13",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/react": "^6.4.13",
     "@types/node": "^12.12.21",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
-    "typescript": "4.0"
+    "autoprefixer": "^10.4.2",
+    "axios": "^0.25.0",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-macros": "^3.1.0",
+    "postcss": "^8.4.5",
+    "react-virtualized": "^9.22.3",
+    "styled-components": "^5.3.3",
+    "tailwindcss": "^3.0.15",
+    "twin.macro": "^2.8.2",
+    "typescript": "4.0",
+    "unstated-next": "^1.1.0"
   }
 }

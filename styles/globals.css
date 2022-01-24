@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Hunter";
+  src: url("/assets/fonts/HunterRegular.woff2");
+}
+
+* {
+  font-family: Inter, "sans-serif";
+}
+
+.react-loading-skeleton {
+  top: -4px !important;
+  margin-bottom: -4px !important;
+}
+
+.ReactVirtualized__Grid.ReactVirtualized__List {
+  overflow: inherit !important;
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+  width: 100%;
+}
