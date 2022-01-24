@@ -32,7 +32,7 @@ Was requested on the challenge to consider the following:
   * Performance
   * Scalability
 
-I sent an email to process accountable asking some questions and chose the folowing stack:
+I sent an email to process accountable asking some questions and choose the following stack:
 
   * Next.js as Framework
   * Tailwind together with styled-components;
