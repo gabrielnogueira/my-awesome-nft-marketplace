@@ -7,7 +7,7 @@ export const AppWrapper = styled.div.attrs({
 })`
   &::after {
     content: " ";
-    ${tw`absolute top-0 right-0 bottom-0 left-0 bg-cover bg-gradient-to-b from-transparent via-transparent to-white bg-no-repeat bg-right-top w-full h-[112vw]`}
+    ${tw`absolute top-0 right-0 bottom-0 left-0 bg-cover bg-gradient-to-b from-transparent via-transparent to-white bg-no-repeat bg-right-top w-full h-[112vw] max-h-[100%]`}
   }
 `;
 

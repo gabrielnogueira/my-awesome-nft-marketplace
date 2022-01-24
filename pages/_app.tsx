@@ -6,7 +6,7 @@ import { ItemProvider } from "../src/providers/item";
 import { ErrorBoundary } from "react-error-boundary";
 import { AppWrapper, ContentWrapper, ErrorFallback } from "components/utils";
 import { useState } from "react";
-import { SwapAnimationWrapper } from "src/components/utils/animations";
+import { SwapAnimationWrapper } from "../src/components/utils/animations";
 
 function MyApp({ Component, pageProps, router }) {
   const renderHeader = Component.name !== "NotFound";

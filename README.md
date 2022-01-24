@@ -2,7 +2,7 @@ This webapp is deployed on netlify!
 
 You can take a look at: https://my-awesome-nft-marketplace.netlify.app/
 
-[![Netlify Status]()](https://app.netlify.com/sites/my-awesome-nft-marketplace/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0851317c-d0d6-4275-99a5-5281ea383b0a/deploy-status)](https://app.netlify.com/sites/my-awesome-nft-marketplace/deploys)
 
 
 # My Awesome NFT Marketplace!
